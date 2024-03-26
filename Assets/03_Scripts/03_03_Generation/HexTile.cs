@@ -15,6 +15,7 @@ public class HexTile : MonoBehaviour
     public GameObject fow;
 
     public Vector2Int offsetCoordinate;
+    public Vector3Int cubeCoordinate;
 
     public List<HexTile> neighbours;
 

@@ -11,6 +11,9 @@ public class HexGrid : MonoBehaviour
     [Tooltip("Taille d'une pièce")] public float size = 1f;
     public HexTileGenerationSettings settings;
 
+    public float startX;
+    public float startY;
+
     public void Clear()
     {
         List<GameObject> children = new List<GameObject>();
@@ -32,24 +35,54 @@ public class HexGrid : MonoBehaviour
     {
         Clear();
         for (int y = 0; y < gridSize.y; y++)
-        {
-            for (int x = 0; x < gridSize.x; x++)
+        {   
+            if (y % 2 == 0)
             {
-                GameObject tile = new GameObject($"Hex {x},{y}");
+                for (int x = 0; x < gridSize.x; x++)
+                {
+                    
+                        GameObject tile = new GameObject($"Hex {x},{y}");
 
-                HexTile hextile = tile.AddComponent<HexTile>();
-                hextile.settings = settings;
-                hextile.RollTileType();
-                hextile.AddTile();
-                
-                //Assign its offset coordinates for human parsing (Colum, Row)
-                hextile.offsetCoordinate = new Vector2Int(x, y);
-                
-                //Assing/convert these to cube coordinates for navigation
-                //hextile.cub
+                        HexTile hextile = tile.AddComponent<HexTile>();
+                        hextile.settings = settings;
+                        hextile.RollTileType();
+                        hextile.AddTile();
+                    
+                        //Assign its offset coordinates for human parsing (Colum, Row)
+                        hextile.offsetCoordinate = new Vector2Int(x, y);
+                    
+                        //Assing/convert these to cube coordinates for navigation
+                        hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
 
-                hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
-                tile.transform.parent = this.transform;
+                        hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+                        tile.transform.parent = this.transform;
+                    
+                    
+                }
+            }
+            else
+            {
+                for (int x = 0; x < gridSize.x + 1; x++)
+                {
+                    
+                    GameObject tile = new GameObject($"Hex {x},{y}");
+
+                    HexTile hextile = tile.AddComponent<HexTile>();
+                    hextile.settings = settings;
+                    hextile.RollTileType();
+                    hextile.AddTile();
+                    
+                    //Assign its offset coordinates for human parsing (Colum, Row)
+                    hextile.offsetCoordinate = new Vector2Int(x, y);
+                    
+                    //Assing/convert these to cube coordinates for navigation
+                    hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
+
+                    hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+                    tile.transform.parent = this.transform;
+                    
+                    
+                }
             }
         }
     }
@@ -76,10 +109,17 @@ public class HexGrid : MonoBehaviour
 
         offset = (shouldOffset) ? width / 2 : 0;
 
-        xPosition = (column * (horizontalDistance)) + offset;
-        yPosition = (row * verticalDistance);
+        xPosition = (column * (horizontalDistance)) + offset + startX;
+        yPosition = (row * verticalDistance) + startY;
         
         return new Vector3(xPosition,0,-yPosition);
     }
 
+    public static Vector3Int OffsetToCube(Vector2Int offset)
+    {
+        var q = offset.x - (offset.y + (offset.y % 2)) / 2;
+        var r = offset.x;
+        return new Vector3Int(q, r, -q - r);
+    }
+    
 }
