@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/02_Scenes/00_Gym.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 072f46db6b41b034e9e2db5420fc66e3,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 0dbcb0061f7b7cf48a27421f17b39d54,
       type: 2}

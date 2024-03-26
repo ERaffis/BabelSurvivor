@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 8901554219199051767}
   - {fileID: 3169378937427146261}
+  - {fileID: 5393335470158186436}
   m_Father: {fileID: 1036024511554638777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3731954582481522732
@@ -43,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036024511554638777}
   m_Layer: 0
-  m_Name: Room_Basic
+  m_Name: Room_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,6 +145,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3202442121962213886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5571589861149138991
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6948415159587936872}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.61237246
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6123724
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.35355338
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3535534
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ebe32c69cc20dee4881b29b824791774,
+        type: 3}
+      propertyPath: m_Name
+      value: Piece_Pillar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ebe32c69cc20dee4881b29b824791774, type: 3}
+--- !u!4 &5393335470158186436 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ebe32c69cc20dee4881b29b824791774,
+    type: 3}
+  m_PrefabInstance: {fileID: 5571589861149138991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8935727816876511260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,6 +277,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: edcb95428d80ff047a271844d7197a4e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2fddc2fa5cfbb9943b290e01166d1a12, type: 2}
     - target: {fileID: 919132149155446097, guid: edcb95428d80ff047a271844d7197a4e,
         type: 3}
       propertyPath: m_Name

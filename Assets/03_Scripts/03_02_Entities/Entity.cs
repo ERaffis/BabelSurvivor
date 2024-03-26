@@ -10,4 +10,5 @@ public class Entity : MonoBehaviour
     [SerializeField] public float currentHealth;
     [Space] 
     [SerializeField] public float movementSpeed;
+
 }

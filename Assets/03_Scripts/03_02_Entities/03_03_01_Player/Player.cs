@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class Player : Entity
     {
         this.maxHealth = newMaxHealth;
     }
-    
+
     public void SetCurrentHealth(float newCurrentHealth)
     {
         this.currentHealth = newCurrentHealth;
