@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b37ad7b675ba1b43aa8478cefb71715, type: 3}
-  m_Name: New Hex Tile Generation Settings
+  m_Name: TestingSettings
   m_EditorClassIdentifier: 
   Room_1: {fileID: 3731954582481522732, guid: 939776d1976956b4d9c40b885821ff0c, type: 3}
   Room_2: {fileID: 3731954582481522732, guid: 2c6e495a617f4484187d0312da14f005, type: 3}
@@ -22,6 +22,8 @@ MonoBehaviour:
   Room_8: {fileID: 3731954582481522732, guid: 2c75afbb43f5d604f964cb14b64bcd84, type: 3}
   Room_9: {fileID: 3731954582481522732, guid: 49cd4100ef8b0f54c91193d782eca331, type: 3}
   Room_10: {fileID: 3731954582481522732, guid: 5b5388f366c34ba418cc259e2f322de7, type: 3}
+  Room_Empty: {fileID: 3731954582481522732, guid: f5fca5a4b8a79b549926c945cef6d791,
+    type: 3}
   Corridor_E_O: {fileID: 1254674024339243642, guid: 1e0e472f6ae1d48418fac475baeabd5c,
     type: 3}
   Corridor_NE_SO: {fileID: 602069208138929016, guid: d27c767966f8f884d8eecc1208b4f05d,

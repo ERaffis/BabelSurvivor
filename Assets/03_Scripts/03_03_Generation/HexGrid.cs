@@ -33,6 +33,10 @@ public class HexGrid : MonoBehaviour
     
     public void LayoutGrid()
     {
+        if (GetComponent<MeshFilter>().sharedMesh !=null)
+        {
+            GetComponent<TileMeshCombiner>().ClearMesh();
+        }
         Clear();
         for (int y = 0; y < gridSize.y; y++)
         {   
@@ -47,17 +51,22 @@ public class HexGrid : MonoBehaviour
                         hextile.settings = settings;
                         hextile.RollTileType();
                         hextile.AddTile();
+                        
+                        if (hextile.tileType == HexTileGenerationSettings.TileType.Room_Empty)
+                        {
+                            DestroyImmediate(tile);
+                        }
+                        else
+                        {
+                            //Assign its offset coordinates for human parsing (Colum, Row)
+                            hextile.offsetCoordinate = new Vector2Int(x, y);
                     
-                        //Assign its offset coordinates for human parsing (Colum, Row)
-                        hextile.offsetCoordinate = new Vector2Int(x, y);
-                    
-                        //Assing/convert these to cube coordinates for navigation
-                        hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
+                            //Assing/convert these to cube coordinates for navigation
+                            hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
 
-                        hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
-                        tile.transform.parent = this.transform;
-                    
-                    
+                            hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+                            tile.transform.parent = this.transform;
+                        }
                 }
             }
             else
@@ -72,19 +81,28 @@ public class HexGrid : MonoBehaviour
                     hextile.RollTileType();
                     hextile.AddTile();
                     
-                    //Assign its offset coordinates for human parsing (Colum, Row)
-                    hextile.offsetCoordinate = new Vector2Int(x, y);
+                    if (hextile.tileType == HexTileGenerationSettings.TileType.Room_Empty)
+                    {
+                        DestroyImmediate(tile);
+                    }
+                    else
+                    {
+                        
+                        //Assign its offset coordinates for human parsing (Colum, Row)
+                        hextile.offsetCoordinate = new Vector2Int(x, y);
                     
-                    //Assing/convert these to cube coordinates for navigation
-                    hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
+                        //Assing/convert these to cube coordinates for navigation
+                        hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
 
-                    hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
-                    tile.transform.parent = this.transform;
-                    
-                    
+                        hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+                        tile.transform.parent = this.transform;
+                    }
                 }
             }
         }
+        
+        TileManager tileManager = GetComponent<TileManager>();
+        tileManager.CalculateNeighbours();
     }
 
     public Vector3 GetPositionForHexFromCoordinates(Vector2Int coords)
@@ -118,7 +136,7 @@ public class HexGrid : MonoBehaviour
     public static Vector3Int OffsetToCube(Vector2Int offset)
     {
         var q = offset.x - (offset.y + (offset.y % 2)) / 2;
-        var r = offset.x;
+        var r = offset.y;
         return new Vector3Int(q, r, -q - r);
     }
     

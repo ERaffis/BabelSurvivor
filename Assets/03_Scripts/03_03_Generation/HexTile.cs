@@ -18,6 +18,8 @@ public class HexTile : MonoBehaviour
     public Vector3Int cubeCoordinate;
 
     public List<HexTile> neighbours;
+    public bool hasNeighbourNE, hasNeighbourE, hasNeighbourSE, hasNeighbourSO, hasNeighbourO, hasNeighbourNO;
+    public HexTile neighbourNE, neighbourE, neighbourSE, neighbourSO, neighbourO, neighbourNO;
 
     private bool isDirty = false;
 
@@ -49,7 +51,6 @@ public class HexTile : MonoBehaviour
     public void RollTileType()
     {
         tileType = (HexTileGenerationSettings.TileType)Random.Range(0, Enum.GetNames(typeof(HexTileGenerationSettings.TileType)).Length);
-        Debug.Log(tileType);
     }
 
     public void AddTile()
@@ -61,6 +62,16 @@ public class HexTile : MonoBehaviour
             collider.sharedMesh = GetComponent<MeshFilter>().mesh;
         }*/
     }
-    
-    
+
+    public void OnDrawGizmosSelected()
+    {
+        
+        foreach (HexTile neighbour in neighbours)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(transform.position, 5f);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, neighbour.transform.position);
+        }
+    }
 }
