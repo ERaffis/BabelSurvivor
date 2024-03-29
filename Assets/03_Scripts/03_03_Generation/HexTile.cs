@@ -21,6 +21,8 @@ public class HexTile : MonoBehaviour
     public bool hasNeighbourNE, hasNeighbourE, hasNeighbourSE, hasNeighbourSO, hasNeighbourO, hasNeighbourNO;
     public HexTile neighbourNE, neighbourE, neighbourSE, neighbourSO, neighbourO, neighbourNO;
 
+    public bool isDisconnected = false;
+    
     private bool isDirty = false;
 
     private void OnValidate()
@@ -61,6 +63,11 @@ public class HexTile : MonoBehaviour
             MeshCollider collider = gameObject.AddComponent<MeshCollider>();
             collider.sharedMesh = GetComponent<MeshFilter>().mesh;
         }*/
+    }
+
+    public void DestroyTile()
+    {
+        DestroyImmediate(gameObject,true);
     }
 
     public void OnDrawGizmosSelected()

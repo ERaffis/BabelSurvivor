@@ -71,3 +71,19 @@ public class SpawnPlayerEditor : Editor
    }
 }
 
+[CustomEditor(typeof(HexTileGenerationSettings))]
+public class HexTileGenerationSettingsEditor : Editor
+{
+   public override void OnInspectorGUI()
+   {
+      DrawDefaultInspector();
+      
+      SpawnPlayer spawnPlayer = (SpawnPlayer)target;
+
+      if (GUILayout.Button("Place Player"))
+      {
+         spawnPlayer.PlacePlayerInLevel();
+      }
+   }
+}
+

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Sirenix;
+using Sirenix.OdinInspector;
 
 public class HexGrid : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class HexGrid : MonoBehaviour
 
     }
     
+    [Button("Generate Layout")]
     public void LayoutGrid()
     {
         if (GetComponent<MeshFilter>().sharedMesh !=null)

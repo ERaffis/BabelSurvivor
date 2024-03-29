@@ -39,11 +39,17 @@ public class TileManager : MonoBehaviour
         {
             RegisterTile(hexTile);
         }
+        
         foreach(HexTile hexTile in hexTiles)
         {
             List<HexTile> neighbours = GetNeighbours(hexTile);
             hexTile.neighbours = neighbours;
+            if (hexTile.neighbours.Count == 0)
+            {
+                hexTile.DestroyTile();
+            }
         }
+        
     }
 
     public void RegisterTile(HexTile tile)
@@ -105,8 +111,8 @@ public class TileManager : MonoBehaviour
                 }
                 
             }
+            
         }
-
         return neighbours;
     }
 }
