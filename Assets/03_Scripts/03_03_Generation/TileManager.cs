@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    [Button("Calculate Neighbours")]
     public void CalculateNeighbours()
     {
         instance = this;

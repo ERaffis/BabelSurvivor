@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -8,6 +9,9 @@ public class TileMeshCombiner : MonoBehaviour
 {
 
     public List<MeshFilter> meshFilters;
+    
+    [HorizontalGroup("Split", 0.5f)]
+    [Button("Combine Floor Mesh")]
     public void CombineMesh()
     {
 
@@ -42,7 +46,8 @@ public class TileMeshCombiner : MonoBehaviour
         GetComponent<MeshCollider>().sharedMesh = null;
         GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
-
+    [HorizontalGroup("Split", 0.5f)]
+    [Button("Clear Floor Mesh")]
     public void ClearMesh()
     {
         transform.GetComponent<MeshFilter>().sharedMesh = null;

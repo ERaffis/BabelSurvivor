@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using Sirenix;
 using Sirenix.OdinInspector;
 
 public class HexGrid : MonoBehaviour
