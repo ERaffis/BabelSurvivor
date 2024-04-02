@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 [ExecuteInEditMode]
 public class HexTile : MonoBehaviour
 {
-    public HexTileGenerationSettings settings;
-    public HexTileGenerationSettings.TileType tileType;
+    public BiomePrefabs settings;
+    public BiomePrefabs.TileType tileType;
+    public BiomePrefabs.TileType previousTileType = BiomePrefabs.TileType.Room_22;
 
     public GameObject tile;
 
@@ -52,12 +53,17 @@ public class HexTile : MonoBehaviour
 
     public void RollTileType()
     {
-        tileType = (HexTileGenerationSettings.TileType)Random.Range(0, Enum.GetNames(typeof(HexTileGenerationSettings.TileType)).Length);
+        tileType = (BiomePrefabs.TileType)Random.Range(0, Enum.GetNames(typeof(BiomePrefabs.TileType)).Length);
     }
 
     public void AddTile()
     {
-        tile = GameObject.Instantiate(settings.GetTile(tileType),transform);
+
+        
+        GameObject tilePrefab = settings.GetTile(tileType, previousTileType);
+        previousTileType = tileType;
+        
+        tile = GameObject.Instantiate(tilePrefab,transform);
         /*if (gameObject.GetComponent<MeshCollider>() == null)
         {
             MeshCollider collider = gameObject.AddComponent<MeshCollider>();

@@ -10,7 +10,7 @@ public class HexGrid : MonoBehaviour
     [Header("Grid Settings")] 
     public Vector2Int gridSize;
     [Tooltip("Taille d'une pièce")] public float size = 1f;
-    public HexTileGenerationSettings settings;
+    public BiomePrefabs settings;
 
     public float startX;
     public float startY;
@@ -54,7 +54,7 @@ public class HexGrid : MonoBehaviour
                         hextile.RollTileType();
                         hextile.AddTile();
                         
-                        if (hextile.tileType == HexTileGenerationSettings.TileType.Room_Empty)
+                        if (hextile.tileType == BiomePrefabs.TileType.Room_Empty)
                         {
                             DestroyImmediate(tile);
                         }
@@ -83,7 +83,7 @@ public class HexGrid : MonoBehaviour
                     hextile.RollTileType();
                     hextile.AddTile();
                     
-                    if (hextile.tileType == HexTileGenerationSettings.TileType.Room_Empty)
+                    if (hextile.tileType == BiomePrefabs.TileType.Room_Empty)
                     {
                         DestroyImmediate(tile);
                     }
