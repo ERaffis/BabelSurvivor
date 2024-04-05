@@ -8,9 +8,8 @@ using Random = UnityEngine.Random;
 public class HexTile : MonoBehaviour
 {
     public BiomePrefabs settings;
-    public BiomePrefabs.TileType tileType;
-    public BiomePrefabs.TileType previousTileType = BiomePrefabs.TileType.Room_22;
-
+    public RoomPrefabs tileType;
+    
     public GameObject tile;
 
     public GameObject fow;
@@ -21,8 +20,9 @@ public class HexTile : MonoBehaviour
     public List<HexTile> neighbours;
     public bool hasNeighbourNE, hasNeighbourE, hasNeighbourSE, hasNeighbourSO, hasNeighbourO, hasNeighbourNO;
     public HexTile neighbourNE, neighbourE, neighbourSE, neighbourSO, neighbourO, neighbourNO;
-
-    public bool isDisconnected = false;
+    
+    
+    public GameObject doorNE, doorE, doorSE, doorSO, doorO, doorNO;
     
     private bool isDirty = false;
 
@@ -33,7 +33,7 @@ public class HexTile : MonoBehaviour
         isDirty = true;
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (isDirty)
         {
@@ -46,29 +46,23 @@ public class HexTile : MonoBehaviour
                 GameObject.DestroyImmediate(tile);
             }
             
-            AddTile();
+            AddTile(settings.roomPrefabs[0].floorPrefab);
             isDirty = false;
         }
     }
+    */
 
     public void RollTileType()
     {
-        tileType = (BiomePrefabs.TileType)Random.Range(0, Enum.GetNames(typeof(BiomePrefabs.TileType)).Length);
+        RoomPrefabs room = settings.SpawnFloor();
+        tileType = room;
+        AddTile(room.floorPrefab);
     }
-
-    public void AddTile()
+    public void AddTile(GameObject roomPrefab)
     {
-
-        
-        GameObject tilePrefab = settings.GetTile(tileType, previousTileType);
-        previousTileType = tileType;
-        
-        tile = GameObject.Instantiate(tilePrefab,transform);
-        /*if (gameObject.GetComponent<MeshCollider>() == null)
-        {
-            MeshCollider collider = gameObject.AddComponent<MeshCollider>();
-            collider.sharedMesh = GetComponent<MeshFilter>().mesh;
-        }*/
+        GameObject tilePrefab = roomPrefab;
+        tile = Instantiate(tilePrefab,transform);
+        GetDoor();
     }
 
     public void DestroyTile()
@@ -85,6 +79,53 @@ public class HexTile : MonoBehaviour
             Gizmos.DrawSphere(transform.position, 5f);
             Gizmos.color = Color.white;
             Gizmos.DrawLine(transform.position, neighbour.transform.position);
+        }
+    }
+
+
+    public void RespawnTile()
+    {
+        foreach (Transform child  in gameObject.transform)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+        
+        tileType = settings.basicRoom;
+        AddTile(tileType.floorPrefab);
+    }
+
+    public void GetDoor()
+    {
+        doorNE = transform.Find(tileType.floorPrefab.name+"(Clone)/Walls/DR_BOT_NE").gameObject;
+        doorE = transform.Find(tileType.floorPrefab.name+"(Clone)/Walls/DR_BOT_E").gameObject;
+        doorSE = transform.Find(tileType.floorPrefab.name+"(Clone)/Walls/DR_BOT_SE").gameObject;
+        doorSO = transform.Find(tileType.floorPrefab.name+"(Clone)/Walls/DR_BOT_SO").gameObject;
+        doorO = transform.Find(tileType.floorPrefab.name+"(Clone)/Walls/DR_BOT_O").gameObject;
+        doorNO = transform.Find(tileType.floorPrefab.name+"(Clone)/Walls/DR_BOT_NO").gameObject;
+    }
+
+    public void SetDoor(String door)
+    {
+        switch (door)
+        {
+            case "NE":
+                doorNE.SetActive(true);
+                break;
+            case "E":
+                doorE.SetActive(true);
+                break;
+            case "SE":
+                doorSE.SetActive(true);
+                break;
+            case "SO":
+                doorSO.SetActive(true);
+                break;
+            case "O":
+                doorO.SetActive(true);
+                break;
+            case "NO":  
+                doorNO.SetActive(true);
+                break;
         }
     }
 }

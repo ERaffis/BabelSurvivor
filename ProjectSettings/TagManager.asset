@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DR_BOT_NE
+  - DR_BOT_E
+  - DR_BOT_SE
+  - DR_BOT_SO
+  - DR_BOT_O
+  - DR_BOT_NO
+  - DR_TOP_NE
+  - DR_TOP_E
+  - DR_TOP_SE
+  - DR_TOP_SO
+  - DR_TOP_O
+  - DR_TOP_NO
   layers:
   - Default
   - TransparentFX

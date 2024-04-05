@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,27 @@ using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
+//Script pour combiner les mesh ensemble. Pour l'instant ça combine seulement les planchers et pas de la manière la plus optimisée. Il faut modifier quelques trucs et ajouter les murs.
 public class TileMeshCombiner : MonoBehaviour
 {
 
     public List<MeshFilter> meshFilters;
-    
+
     [HorizontalGroup("Split", 0.5f)]
     [Button("Combine Floor Mesh")]
+    public void Awake()
+    {
+        HexGrid.OnLayoutFinished  += CombineMesh;
+    }
+
     public void CombineMesh()
     {
-
+        ClearMesh();
         meshFilters = new List<MeshFilter>();
         MeshFilter[] meshChildren = GetComponentsInChildren<MeshFilter>();
         for (int i = 0; i < meshChildren.Length; i++)
         {
-            if (meshChildren[i].gameObject.name == "Piece_Floor")
+            if (meshChildren[i].gameObject.name.Contains("FL_"))
             {
                 meshFilters.Add(meshChildren[i]);
             }

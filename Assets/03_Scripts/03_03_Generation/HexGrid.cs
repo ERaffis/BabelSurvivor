@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class HexGrid : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class HexGrid : MonoBehaviour
 
     public float startX;
     public float startY;
+
+    public delegate void LayoutEvents();
+    public static event LayoutEvents OnLayoutFinished;
 
     public void Clear()
     {
@@ -31,7 +35,12 @@ public class HexGrid : MonoBehaviour
         }
 
     }
-    
+
+    private void Start()
+    {
+        LayoutGrid();
+    }
+
     [Button("Generate Layout")]
     public void LayoutGrid()
     {
@@ -50,11 +59,11 @@ public class HexGrid : MonoBehaviour
                         GameObject tile = new GameObject($"Hex {x},{y}");
 
                         HexTile hextile = tile.AddComponent<HexTile>();
+                        
                         hextile.settings = settings;
                         hextile.RollTileType();
-                        hextile.AddTile();
                         
-                        if (hextile.tileType == BiomePrefabs.TileType.Room_Empty)
+                        if (hextile.tileType.isEmptyRoom)
                         {
                             DestroyImmediate(tile);
                         }
@@ -81,9 +90,8 @@ public class HexGrid : MonoBehaviour
                     HexTile hextile = tile.AddComponent<HexTile>();
                     hextile.settings = settings;
                     hextile.RollTileType();
-                    hextile.AddTile();
                     
-                    if (hextile.tileType == BiomePrefabs.TileType.Room_Empty)
+                    if (hextile.tileType.isEmptyRoom)
                     {
                         DestroyImmediate(tile);
                     }
@@ -104,7 +112,24 @@ public class HexGrid : MonoBehaviour
         }
         
         TileManager tileManager = GetComponent<TileManager>();
-        tileManager.CalculateNeighbours();
+        //Check here all the connections to see if problems
+        if (OnLayoutFinished != null)
+        {
+            OnLayoutFinished();
+        }
+        
+
+        /*Cette ligne doit être présente pour l'instant car je test la génération sans être en play mode. Si on est en play mode le if juste au dessus fait la bonne chose*/
+        if (!EditorApplication.isPlaying)
+        {
+            tileManager.CalculateNeighbours();
+            tileManager.CheckForConnection();
+        }
+
+        
+        
+        
+
     }
 
     public Vector3 GetPositionForHexFromCoordinates(Vector2Int coords)
@@ -141,5 +166,4 @@ public class HexGrid : MonoBehaviour
         var r = offset.y;
         return new Vector3Int(q, r, -q - r);
     }
-    
 }

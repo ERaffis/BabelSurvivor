@@ -65,8 +65,12 @@ public class Movement : MonoBehaviour
     //Méthode pour un dash si on en fait un.
     public void Dash(InputAction.CallbackContext context)
     {
-        //Insérer le code si on fait un dash ici.
-        Debug.Log(("Player Dash"));
+        if (context.performed)
+        {
+            //Insérer le code si on fait un dash ici.
+            Debug.Log(("Player Dash"));
+        }
+
     }
     
     float AngleDir(Vector3 fwd, Vector3 targetDir, Vector3 up) {

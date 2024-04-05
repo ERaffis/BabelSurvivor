@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,13 +19,14 @@ public class SpawnPlayer : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    [Button]
     public void PlacePlayerInLevel()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (tileManager.hexTiles != null && tileManager.hexTiles.Length != 0)
         {
-            player.transform.position = tileManager.hexTiles[(tileManager.hexTiles.Length / 2) + Random.Range(min,max)].transform.position + new Vector3(0,1,0);
+            player.transform.position = tileManager.hexTiles[(tileManager.hexTiles.Length / 2) + Random.Range(min,max)].transform.position + new Vector3(0,1,-5);
         }
     }
 }

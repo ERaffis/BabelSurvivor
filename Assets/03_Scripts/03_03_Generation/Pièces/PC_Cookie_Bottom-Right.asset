@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388dde897de04094c835e8cb6c0b12cd, type: 3}
+  m_Name: PC_Cookie_Bottom-Right
+  m_EditorClassIdentifier: 
+  biome: {fileID: 11400000, guid: d8746c1d1e100614894c7d00148864b3, type: 2}
+  spawnRate: 15
+  isEmptyRoom: 0
+  floorPrefab: {fileID: 3076439100698268734, guid: 5e45e863349ca894f8004ec2398491c3,
+    type: 3}
+  allowedNeighbours:
+  - {fileID: 11400000, guid: 8318442d262fae34bb79cdf9cc444ede, type: 2}
+  - {fileID: 11400000, guid: 9d96a0465da246c498c66417bea7a261, type: 2}
+  - {fileID: 11400000, guid: eed63ab34f5837f479c46470485014be, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 6252ccbaa4229ef4eaa386b472902521, type: 2}
+  - {fileID: 11400000, guid: 88831df73c6c04b488f0588f7f26fd96, type: 2}
+  - {fileID: 11400000, guid: ebc8346d7f17bff499cc3ed973423168, type: 2}
+  - {fileID: 11400000, guid: 3df2753218a96254eb34801f3ecff8d4, type: 2}
+  - {fileID: 11400000, guid: 0f6a8bc65ea49fd40b09ab9ec65beeaa, type: 2}
+  - {fileID: 11400000, guid: be7aa4e888ef9724d881164fbbbfc92e, type: 2}
+  - {fileID: 11400000, guid: fa4817a95b51da344b4e529ebab13d40, type: 2}
+  - {fileID: 11400000, guid: 76f6cfb531fb7da46b269b4e97ee2b3a, type: 2}
+  - {fileID: 11400000, guid: f65d048b89144d24bb9107a5153fbfef, type: 2}
+  - {fileID: 11400000, guid: 0496f20d5e92f704293f2ff46c6b8c8a, type: 2}
+  - {fileID: 11400000, guid: bba71373c9e94fc48ad2787a759cf627, type: 2}
+  - {fileID: 11400000, guid: a8f3324195717da458e6c2807c4e739a, type: 2}
+  - {fileID: 11400000, guid: 143700219eb3d7647a5ad959b7a9f636, type: 2}
+  - {fileID: 11400000, guid: f9cd6eb0e8ce8a94ab38dd1bcf5b8c59, type: 2}
+  - {fileID: 11400000, guid: 0120956d170bf874c810bd0f0012e72a, type: 2}
+  - {fileID: 11400000, guid: 94f69772543d55c4f90290a21d61e84a, type: 2}
+  connectionNE: 1
+  connectionE: 0
+  connectionSE: 0
+  connectionSO: 1
+  connectionO: 1
+  connectionNO: 1
