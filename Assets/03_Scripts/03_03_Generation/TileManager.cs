@@ -11,11 +11,13 @@ public class TileManager : MonoBehaviour
     public TileManager instance;
     public Dictionary<Vector3Int, HexTile> tiles;
     public HexTile[] hexTiles;
+    
     private void Awake()
     {
         HexGrid.OnLayoutFinished  += CheckForConnection;
         HexGrid.OnLayoutFinished  += CalculateNeighbours;
         instance = this;
+
         tiles = new Dictionary<Vector3Int, HexTile>{};
 
         HexTile[] hexTiles = gameObject.GetComponentsInChildren<HexTile>();

@@ -70,17 +70,17 @@ public class HexTile : MonoBehaviour
         DestroyImmediate(gameObject,true);
     }
 
-    public void OnDrawGizmosSelected()
-    {
+    // public void OnDrawGizmosSelected()
+    // {
         
-        foreach (HexTile neighbour in neighbours)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(transform.position, 5f);
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(transform.position, neighbour.transform.position);
-        }
-    }
+    //     foreach (HexTile neighbour in neighbours)
+    //     {
+    //         Gizmos.color = Color.blue;
+    //         Gizmos.DrawSphere(transform.position, 5f);
+    //         Gizmos.color = Color.white;
+    //         Gizmos.DrawLine(transform.position, neighbour.transform.position);
+    //     }
+    // }
 
 
     public void RespawnTile()

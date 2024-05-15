@@ -8,6 +8,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.310DEAA1" = "h:t:TileManager #m_Enabled=True"
+	"OpenInspectorPreview.310DEAA1" = "0"
+	"currentGroup.310DEAA1" = "all"
 }
 providers = {
 	log = {
@@ -53,6 +56,16 @@ providers = {
 	packages = {
 		active = true
 		priority = 90
+		defaultAction = null
+	}
+	st = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	at = {
+		active = true
+		priority = 100
 		defaultAction = null
 	}
 }

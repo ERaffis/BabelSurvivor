@@ -22,13 +22,20 @@ public class TileMeshCombiner : MonoBehaviour
     public void CombineMesh()
     {
         ClearMesh();
+
         meshFilters = new List<MeshFilter>();
-        MeshFilter[] meshChildren = GetComponentsInChildren<MeshFilter>();
+        
+        MeshFilter[] meshChildren = new MeshFilter[0];
+
+        meshChildren = GetComponentsInChildren<MeshFilter>();
+
+        
         for (int i = 0; i < meshChildren.Length; i++)
         {
             if (meshChildren[i].gameObject.name.Contains("FL_"))
             {
                 meshFilters.Add(meshChildren[i]);
+                meshChildren[i].gameObject.SetActive(false);
             }
         }
         
@@ -53,17 +60,19 @@ public class TileMeshCombiner : MonoBehaviour
         GetComponent<MeshCollider>().sharedMesh = null;
         GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
+    
+    
     [HorizontalGroup("Split", 0.5f)]
     [Button("Clear Floor Mesh")]
     public void ClearMesh()
     {
+
         transform.GetComponent<MeshFilter>().sharedMesh = null;
         transform.gameObject.SetActive(true);
-        foreach (MeshFilter meshFilter in meshFilters)
-        {
-            meshFilter.gameObject.SetActive(true);
-        }
         meshFilters.Clear();
+
         GetComponent<MeshCollider>().sharedMesh = null;
+        transform.GetComponent<MeshFilter>().sharedMesh = null;
+        
     }
 }
