@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public SphereCollider preventSpawnSphere;
+
     public void SetMaxHealth(float newMaxHealth)
     {
         this.maxHealth = newMaxHealth;

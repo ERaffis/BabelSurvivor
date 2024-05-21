@@ -25,7 +25,7 @@ public class TileMeshCombiner : MonoBehaviour
 
         meshFilters = new List<MeshFilter>();
         
-        MeshFilter[] meshChildren = new MeshFilter[0];
+        MeshFilter[] meshChildren;
 
         meshChildren = GetComponentsInChildren<MeshFilter>();
 
@@ -57,7 +57,6 @@ public class TileMeshCombiner : MonoBehaviour
         transform.GetComponent<MeshFilter>().sharedMesh = mesh;
         transform.gameObject.SetActive(true);
         
-        GetComponent<MeshCollider>().sharedMesh = null;
         GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
     

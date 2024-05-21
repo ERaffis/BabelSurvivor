@@ -33,24 +33,17 @@ public class HexTile : MonoBehaviour
         isDirty = true;
     }
 
-    /*private void Update()
-    {
-        if (isDirty)
-        {
-            if (Application.isPlaying)
-            {
-                GameObject.Destroy(tile);
-            }
-            else
-            {
-                GameObject.DestroyImmediate(tile);
-            }
+    // private void Update()
+    // {
+    //     if (isDirty)
+    //     {
+    //         DestroyTile();
             
-            AddTile(settings.roomPrefabs[0].floorPrefab);
-            isDirty = false;
-        }
-    }
-    */
+    //         AddTile(settings.roomPrefabs[0].floorPrefab);
+    //         isDirty = false;
+    //     }
+    // }
+
 
     public void RollTileType()
     {
@@ -70,17 +63,17 @@ public class HexTile : MonoBehaviour
         DestroyImmediate(gameObject,true);
     }
 
-    // public void OnDrawGizmosSelected()
-    // {
+    public void OnDrawGizmosSelected()
+    {
         
-    //     foreach (HexTile neighbour in neighbours)
-    //     {
-    //         Gizmos.color = Color.blue;
-    //         Gizmos.DrawSphere(transform.position, 5f);
-    //         Gizmos.color = Color.white;
-    //         Gizmos.DrawLine(transform.position, neighbour.transform.position);
-    //     }
-    // }
+        foreach (HexTile neighbour in neighbours)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(transform.position, 5f);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, neighbour.transform.position);
+        }
+    }
 
 
     public void RespawnTile()

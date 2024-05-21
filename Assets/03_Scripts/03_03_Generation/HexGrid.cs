@@ -22,8 +22,154 @@ public class HexGrid : MonoBehaviour
 
     public delegate void LayoutEvents();
     public static event LayoutEvents OnLayoutFinished;
+    public static event LayoutEvents OnClearFinished;
 
-    public void Clear()
+    public void Awake()
+    {
+
+    }
+
+    private void Start()
+    {
+        GenerateGrid();
+    }
+
+    [Button("Generate Grid")]
+    public void GenerateGrid()
+    {
+        //Réinitialise la grille si elle a déjà été créée.
+        ClearGrid();
+
+        //Génération de la grille. Passe à travers toute les rangées (Y) et toute les colonnes (X) à l'intérieur
+        for (int y = 0; y < gridSize.y; y++)
+        {   
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                
+                GameObject tile = new GameObject($"Tuile {x},{y}");
+
+                HexTile hextile = tile.AddComponent<HexTile>();
+                
+                hextile.settings = settings;
+                hextile.RollTileType();
+                
+                //Assign its offset coordinates for human parsing (Colum, Row)
+                hextile.offsetCoordinate = new Vector2Int(x, y);
+        
+                //Assing/convert these to cube coordinates for navigation
+                hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
+
+                hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+                tile.transform.parent = this.transform;
+
+            }
+        }
+        
+        
+        tileManager = GetComponent<TileManager>();
+        tileMeshCombiner = GetComponent<TileMeshCombiner>();
+
+        //Check here all the connections to see if problems
+        if (OnLayoutFinished != null) OnLayoutFinished();
+        
+
+#if UNITY_EDITOR
+        
+           tileManager.CalculateNeighbours();
+           tileManager.CheckForConnection();
+           tileMeshCombiner.CombineMesh();
+                  
+#endif
+    }
+
+
+//     [Button("Generate Grid")]
+//     public void LayoutGrid()
+//     {
+//         Clear();
+//         for (int y = 0; y < gridSize.y; y++)
+//         {   
+//             if (y % 2 == 0)
+//             {
+//                 for (int x = 0; x < gridSize.x; x++)
+//                 {
+                    
+//                         GameObject tile = new GameObject($"Tuile {x},{y}");
+
+//                         HexTile hextile = tile.AddComponent<HexTile>();
+                        
+//                         hextile.settings = settings;
+//                         hextile.RollTileType();
+                        
+//                         if (hextile.tileType.isEmptyRoom)
+//                         {
+//                             DestroyImmediate(tile);
+//                         }
+//                         else
+//                         {
+//                             Assign its offset coordinates for human parsing (Colum, Row)
+//                             hextile.offsetCoordinate = new Vector2Int(x, y);
+                    
+//                             Assing/convert these to cube coordinates for navigation
+//                             hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
+
+//                             hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+//                             tile.transform.parent = this.transform;
+//                         }
+//                 }
+//             }
+//             else
+//             {
+//                 for (int x = 0; x < gridSize.x; x++)
+//                 {
+                    
+//                     GameObject tile = new GameObject($"Tuile {x},{y}");
+
+//                     HexTile hextile = tile.AddComponent<HexTile>();
+//                     hextile.settings = settings;
+//                     hextile.RollTileType();
+                    
+//                     if (hextile.tileType.isEmptyRoom)
+//                     {
+//                         DestroyImmediate(tile);
+//                     }
+//                     else
+//                     {
+                        
+//                         Assign its offset coordinates for human parsing (Colum, Row)
+//                         hextile.offsetCoordinate = new Vector2Int(x, y);
+                    
+//                         Assing/convert these to cube coordinates for navigation
+//                         hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
+
+//                         hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
+//                         tile.transform.parent = this.transform;
+//                     }
+//                 }
+//             }
+//         }
+        
+        
+//         tileManager = GetComponent<TileManager>();
+//         tileMeshCombiner = GetComponent<TileMeshCombiner>();
+
+//         Check here all the connections to see if problems
+//         if (OnLayoutFinished != null) OnLayoutFinished();
+        
+
+// #if UNITY_EDITOR
+        
+//            tileManager.CalculateNeighbours();
+//            tileManager.CheckForConnection();
+//            tileMeshCombiner.CombineMesh();
+                  
+// #endif
+
+//     }
+
+
+    [Button("Clear Grid")]
+    public void ClearGrid()
     {
         List<GameObject> children = new List<GameObject>();
 
@@ -38,95 +184,9 @@ public class HexGrid : MonoBehaviour
             DestroyImmediate(child,true);
         }
 
-    }
-
-    private void Start()
-    {
-        LayoutGrid();
-    }
-
-    [Button("Generate Layout")]
-    public void LayoutGrid()
-    {
-        Clear();
-        for (int y = 0; y < gridSize.y; y++)
-        {   
-            if (y % 2 == 0)
-            {
-                for (int x = 0; x < gridSize.x; x++)
-                {
-                    
-                        GameObject tile = new GameObject($"Tuile {x},{y}");
-
-                        HexTile hextile = tile.AddComponent<HexTile>();
-                        
-                        hextile.settings = settings;
-                        hextile.RollTileType();
-                        
-                        if (hextile.tileType.isEmptyRoom)
-                        {
-                            DestroyImmediate(tile);
-                        }
-                        else
-                        {
-                            //Assign its offset coordinates for human parsing (Colum, Row)
-                            hextile.offsetCoordinate = new Vector2Int(x, y);
-                    
-                            //Assing/convert these to cube coordinates for navigation
-                            hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
-
-                            hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
-                            tile.transform.parent = this.transform;
-                        }
-                }
-            }
-            else
-            {
-                for (int x = 0; x < gridSize.x + 1; x++)
-                {
-                    
-                    GameObject tile = new GameObject($"Tuile {x},{y}");
-
-                    HexTile hextile = tile.AddComponent<HexTile>();
-                    hextile.settings = settings;
-                    hextile.RollTileType();
-                    
-                    if (hextile.tileType.isEmptyRoom)
-                    {
-                        DestroyImmediate(tile);
-                    }
-                    else
-                    {
-                        
-                        //Assign its offset coordinates for human parsing (Colum, Row)
-                        hextile.offsetCoordinate = new Vector2Int(x, y);
-                    
-                        //Assing/convert these to cube coordinates for navigation
-                        hextile.cubeCoordinate = OffsetToCube(hextile.offsetCoordinate);
-
-                        hextile.transform.position = GetPositionForHexFromCoordinates(hextile.offsetCoordinate);
-                        tile.transform.parent = this.transform;
-                    }
-                }
-            }
-        }
-        
-        
-        tileManager = GetComponent<TileManager>();
-        tileMeshCombiner = GetComponent<TileMeshCombiner>();
-
-        //Check here all the connections to see if problems
-        if (OnLayoutFinished != null)
-        {
-           OnLayoutFinished();
-        }
-        
-
 #if UNITY_EDITOR
         
-           tileManager.CalculateNeighbours();
-           tileManager.CheckForConnection();
-           tileMeshCombiner.CombineMesh();
+           tileManager.ClearHexTiles();
                   
 #endif
 

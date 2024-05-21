@@ -37,6 +37,7 @@ public class TileManager : MonoBehaviour
     {
         HexGrid.OnLayoutFinished  += CheckForConnection;
         HexGrid.OnLayoutFinished  += CalculateNeighbours;
+        HexGrid.OnClearFinished += ClearHexTiles;
     }
 
     [Button("Calculate Neighbours")]
@@ -62,6 +63,11 @@ public class TileManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void ClearHexTiles()
+    {
+        hexTiles = new HexTile[0];
     }
 
     public void RegisterTile(HexTile tile)

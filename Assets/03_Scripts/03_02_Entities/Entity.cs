@@ -11,4 +11,5 @@ public class Entity : MonoBehaviour
     [Space] 
     [SerializeField] public float movementSpeed;
 
+
 }
